@@ -1,0 +1,70 @@
+{
+  "name": "md3-markdown-renderer",
+  "productName": "Markdown",
+  "version": "1.2.2",
+  "description": "Material Design 3 风格的 Markdown 实时渲染桌面应用（Windows 10）",
+  "main": "src/main/main.js",
+  "author": "",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build:renderer": "node scripts/build-renderer.mjs",
+    "icon": "node scripts/gen-icon.mjs",
+    "start": "node scripts/build-renderer.mjs && electron .",
+    "dev": "npm run start",
+    "pack": "node scripts/build-renderer.mjs --prod && node scripts/gen-icon.mjs && electron-builder --win --dir",
+    "dist": "node scripts/build-renderer.mjs --prod && node scripts/gen-icon.mjs && electron-builder --win"
+  },
+  "build": {
+    "appId": "com.local.md3markdown",
+    "productName": "Markdown",
+    "copyright": "Copyright © 2026",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "dist/renderer/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Markdown"
+    },
+    "portable": {
+      "artifactName": "Markdown-Portable-${version}.${ext}"
+    },
+    "artifactName": "Markdown-Setup-${version}.${ext}"
+  },
+  "devDependencies": {
+    "dompurify": "^3.4.14",
+    "electron": "^44.2.0",
+    "electron-builder": "^26.16.0",
+    "esbuild": "^0.28.2",
+    "highlight.js": "^11.12.0",
+    "marked": "^18.0.11"
+  }
+}

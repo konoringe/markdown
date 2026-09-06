@@ -1,0 +1,50 @@
+/* MD3 动效令牌 + 主题切换的流体扩散 */
+
+:root {
+  --md-sys-motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-easing-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --md-sys-motion-easing-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --md-sys-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-easing-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --md-sys-motion-duration-short: 120ms;
+  --md-sys-motion-duration-medium: 200ms;
+  --md-sys-motion-duration-long: 300ms;
+  --md-sys-motion-duration-extra-long: 420ms;
+  --md-sys-motion-duration-huge: 560ms;
+}
+
+/* 视图切换：自 FAB 涌出的涟漪光环（波环），扩散至整个窗口后淡出 */
+.reveal__ring {
+  position: fixed;
+  z-index: 999;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform, opacity;
+  color: var(--md-sys-color-tertiary-container); /* 涟漪跟随主题的淡粉色 */
+}
+
+/* 主题切换：自标题栏右上角扩散的圆形揭示 */
+::view-transition-old(root) {
+  animation: none;
+}
+
+::view-transition-new(root) {
+  animation: md-theme-reveal var(--md-sys-motion-duration-huge) var(--md-sys-motion-easing-emphasized);
+}
+
+@keyframes md-theme-reveal {
+  from {
+    clip-path: circle(0px at calc(100% - 68px) 20px);
+  }
+  to {
+    clip-path: circle(160% at calc(100% - 68px) 20px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}

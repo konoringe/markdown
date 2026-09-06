@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https: http:; font-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>Markdown</title>
+    <link rel="stylesheet" href="./app.css" />
+  </head>
+  <body data-mode="edit">
+    <header class="titlebar" id="titlebar">
+      <div class="titlebar__brand">
+        <span class="titlebar__mark" aria-hidden="true"></span>
+        <span class="titlebar__name">Markdown</span>
+      </div>
+
+      <div class="titlebar__controls">
+        <button class="tb-btn" type="button" data-action="minimize" title="最小化" aria-label="最小化">
+          <svg class="tb-btn__icon" viewBox="0 0 10 10" aria-hidden="true">
+            <path d="M0 5H10" />
+          </svg>
+        </button>
+
+        <button class="tb-btn" type="button" data-action="maximize" title="最大化" aria-label="最大化">
+          <svg class="tb-btn__icon tb-btn__icon--maximize" viewBox="0 0 10 10" aria-hidden="true">
+            <rect x="0.5" y="0.5" width="9" height="9" />
+          </svg>
+          <svg class="tb-btn__icon tb-btn__icon--restore" viewBox="0 0 10 10" aria-hidden="true">
+            <path d="M2.5 0.75v2h-1.75v6.5h6.5V7.5h1.75v-6.75z" />
+          </svg>
+        </button>
+
+        <button class="tb-btn tb-btn--close" type="button" data-action="close" title="关闭" aria-label="关闭">
+          <svg class="tb-btn__icon" viewBox="0 0 10 10" aria-hidden="true">
+            <path d="M0 0 10 10M10 0 0 10" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="stage">
+      <div class="stage__inner" id="stageInner">
+        <textarea
+          id="editor"
+          class="layer layer--edit"
+          spellcheck="false"
+          aria-label="Markdown 原文"
+          placeholder="在此粘贴 Markdown 文本…"
+        ></textarea>
+        <article id="preview" class="layer layer--preview" aria-live="polite" tabindex="-1"></article>
+      </div>
+    </main>
+
+    <button id="fab" class="fab" type="button" title="切换视图 (Ctrl+E)" aria-label="切换到渲染视图">
+      <span class="fab__icons">
+        <svg class="fab__icon fab__icon--preview" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M2.4 12S6 5.9 12 5.9 21.6 12 21.6 12 18 18.1 12 18.1 2.4 12 2.4 12Z" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+        <svg class="fab__icon fab__icon--edit" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 20h4L20.1 7.9a2.1 2.1 0 0 0 0-3l-1.2-1.2a2.1 2.1 0 0 0-3 0L4 16v4Z" />
+          <path d="M14.6 5.9l3.5 3.5" />
+        </svg>
+      </span>
+    </button>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>

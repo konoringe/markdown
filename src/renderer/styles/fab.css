@@ -1,0 +1,82 @@
+/* MD3 FAB：56dp 容器、正圆形、三层 elevation、状态层与涟漪 */
+
+.fab {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 10;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%; /* 正圆形按钮 */
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  box-shadow: var(--md-sys-elevation-3);
+  cursor: pointer;
+  overflow: hidden;
+  -webkit-app-region: no-drag;
+  -webkit-tap-highlight-color: transparent;
+  transition: box-shadow var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard),
+    background-color var(--md-sys-motion-duration-long) var(--md-sys-motion-easing-standard),
+    color var(--md-sys-motion-duration-long) var(--md-sys-motion-easing-standard);
+}
+
+.fab::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: currentColor;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+}
+
+.fab:hover::after {
+  opacity: var(--md-sys-state-hover-opacity);
+}
+
+.fab:focus-visible {
+  outline: 3px solid var(--md-sys-color-secondary);
+  outline-offset: 3px;
+}
+
+/* 预览态换成 tertiary-container，给切换一个色彩层面的流动反馈 */
+body[data-mode='preview'] .fab {
+  background-color: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+}
+
+.fab__icons {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.fab__icon {
+  grid-area: 1 / 1;
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+
+body[data-mode='edit'] .fab__icon--preview,
+body[data-mode='preview'] .fab__icon--edit {
+  opacity: 1;
+}
+
+.fab__ripple {
+  position: absolute;
+  border-radius: 50%;
+  background-color: currentColor;
+  opacity: 0;
+  transform: scale(0);
+  pointer-events: none;
+}
